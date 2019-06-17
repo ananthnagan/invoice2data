@@ -30,6 +30,7 @@ def to_text(path, bucket_name='cloud-vision-84893', language='fr'):
 
     path_dir, filename = os.path.split(path)
     result_blob_basename = filename.replace('.pdf', '').replace('.PDF', '')
+    #forming the json file name according to no of pages
      result_blob_name = result_blob_basename + '/output-1-to-'+str(PdfFileReader(open(path, "rb")).getNumPages())+'.json'
     result_blob_uri = 'gs://{}/{}/'.format(bucket_name, result_blob_basename)
     input_blob_uri = 'gs://{}/{}'.format(bucket_name, filename)
@@ -76,7 +77,7 @@ def to_text(path, bucket_name='cloud-vision-84893', language='fr'):
     json_string = result_blob.download_as_string()
     response = json_format.Parse(json_string, vision.types.AnnotateFileResponse())
 
-    # The actual response for the first page of the input file.
+    # The actual response for the every of the input file.
     anottext=''
     for x in range(PdfFileReader(open(path, "rb")).getNumPages()):
         first_page_response = response.responses[x]
