@@ -25,7 +25,7 @@ def to_text(path, bucket_name='cloud-vision-84893', language='fr'):
     from google.cloud import storage
     from google.protobuf import json_format
     from PyPDF2 import PdfFileReader
-    
+    #
     # Supported mime_types are: 'application/pdf' and 'image/tiff'
     mime_type = 'application/pdf'
 
